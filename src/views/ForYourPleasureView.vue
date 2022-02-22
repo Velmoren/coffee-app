@@ -48,16 +48,14 @@
         <div class="row">
           <div class="col-lg-10 offset-lg-1">
             <div class="shop__wrapper">
-
               <product-card
                 v-for="card in goods"
-                :key="card.id"
                 classItem="shop__item"
-                :name="card.name"
-                :price="card.price"
-                :image="card.image"
+                :key="card.id"
+                :style="{cursor: 'pointer'}"
+                :card="card"
+                @navigate="redirectToProduct"
               />
-              
             </div>
           </div>
         </div>
@@ -72,47 +70,15 @@ import ProductCard from "@/components/ProductCard.vue";
 
 export default {
   components: { NavBarComponent, ProductCard },
-  data() {
-    return {
-      goods: [
-        {
-          id: 0,
-          name: "Solimo Coffee Beans 2kg",
-          price: 10.73,
-          image: "coffee-1.jpg",
-        },
-        {
-          id: 1,
-          name: "Presto Coffee Beans 1kg",
-          price: 15.99,
-          image: "coffee-2.jpg",
-        },
-        {
-          id: 2,
-          name: "AROMISTICO Coffee 1kg",
-          price: 6.99,
-          image: "coffee-3.jpg",
-        },
-        {
-          id: 3,
-          name: "Solimo Coffee Beans 2kg",
-          price: 10.73,
-          image: "coffee-1.jpg",
-        },
-        {
-          id: 4,
-          name: "Presto Coffee Beans 1kg",
-          price: 15.99,
-          image: "coffee-2.jpg",
-        },
-        {
-          id: 5,
-          name: "AROMISTICO Coffee 1kg",
-          price: 6.99,
-          image: "coffee-3.jpg",
-        },
-      ],
-    };
+  computed: {
+    goods() {
+      return this.$store.getters["getGoods"];
+    },
+  },
+  methods: {
+    redirectToProduct(id) {
+      this.$router.push({ name: "goods", params: { id: id } });
+    },
   },
 };
 </script>

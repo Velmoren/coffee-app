@@ -1,6 +1,6 @@
 <template>
    <main>
-    <div class="banner itempage-banner">
+    <div class="banner" :class="[pageName === 'coffee' ? 'coffepage-banner' : null, pageName === 'goods' ? 'goodspage-banner' : null]">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
@@ -47,5 +47,10 @@ import NavBarComponent from "@/components/NavBarComponent.vue";
 
 export default {
   components: { NavBarComponent },
+  computed: {
+      pageName() {
+        return this.$route.name
+      }
+  },
 }
 </script>
